@@ -13,14 +13,14 @@ def imprimir_menu():
     
 # Valida a opção (int) selecionada pelo usuário. Previne opções incorretas
 def validar_opcao(opcao: int) -> bool:
-    if (not isinstance(opcao, int) or (opcao < 1 or opcao > 5 )):
+    if not isinstance(opcao, int) or (opcao < 1 or opcao > 5 ):
         return False
     
     return True
 
 def executar_opcao(opcao: int) -> bool:
     # A partir da opção selecionada, delega para a função específica
-    match(opcao):
+    match opcao:
         case 1:
             task.adicionar_tarefa()
         case 2:
@@ -37,28 +37,32 @@ def executar_opcao(opcao: int) -> bool:
 def main():
     opcao = 0
     
-    while (opcao != 5):
+    while opcao != 5:
         # 1. Imprime as opções disponíveis do menu
         os.system('cls' if os.name == 'nt' else 'clear')
         imprimir_menu()
         
         # 2. Solicita a opção para o usuário
-        opcao = int(input("Digite uma opção: "))
+        try: 
+            opcao = int(input("Digite uma opção: "))
+        except ValueError:
+            print("Valor inserido é inválido! Deve ser inserido um valor numérico.")
+            continue
         
         # 3. Valida a opção digitada pelo usuário
-        if (not validar_opcao(opcao)):
+        if not validar_opcao(opcao):
             os.system('cls' if os.name == 'nt' else 'clear')
             print("Opção inválida!")
             continue
     
         # 4. Se a opção for válida, delega para a ação selecionada
-        if (opcao == 5):
+        if opcao == 5:
             os.system('cls' if os.name == 'nt' else 'clear')
             print("Saindo do sistema...")
             break
         
         # Se o usuário digitou uma opção inválida, exibe erro
-        if (not executar_opcao(opcao)):
+        if not executar_opcao(opcao):
             print("Opção inválida!")
             input("Pressione qualquer tecla para prosseguir...")
             continue

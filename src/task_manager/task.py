@@ -8,7 +8,7 @@ def adicionar_tarefa() -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
     nome_tarefa = None
     
-    while (not nome_tarefa):
+    while not nome_tarefa:
         nome_tarefa = input("Digite o nome da tarefa: ")
         
     # Quando o nome inserido não for nulo ou vazio, insere a nova tarefa na lista de tarefas
@@ -38,7 +38,7 @@ def concluir_tarefa() -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
     nome_tarefa = None
     
-    while (not nome_tarefa):
+    while not nome_tarefa:
         nome_tarefa = input("Digite o nome da tarefa: ")
     
     # Verifica se a tarefa consta na lista de tarefas
@@ -47,11 +47,11 @@ def concluir_tarefa() -> None:
     tarefa_encontrada = False
     
     for tarefa in data.tarefas:
-        if (tarefa.get("nome") == nome_tarefa):
+        if tarefa.get("nome") == nome_tarefa:
             tarefa["status"] = "Concluido"
             tarefa_encontrada = True
     
-    if (not tarefa_encontrada):
+    if not tarefa_encontrada:
         print("Tarefa não encontrada! Nenhuma alteração foi realizada.")
     else:
         print("Status atualizado com sucesso!")
@@ -68,7 +68,7 @@ def remover_tarefa() -> None:
         nome_tarefa = input("Digite o nome da tarefa: ")
     
     # Remove todos os objetos que não contenham o nome da tarefa informado
-    if (not any(tarefa for tarefa in data.tarefas if tarefa.get("nome") == nome_tarefa)):
+    if not any(tarefa for tarefa in data.tarefas if tarefa.get("nome") == nome_tarefa):
         print("Tarefa não encontrada! Nenhuma alteração foi realizada.")
     else:
         data.tarefas = [tarefa for tarefa in data.tarefas if (tarefa.get("nome") != nome_tarefa)]
